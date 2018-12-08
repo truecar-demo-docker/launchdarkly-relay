@@ -405,6 +405,8 @@ func NewRelay(c Config, clientFactory clientFactoryFunc) (*Relay, error) {
 func (r *Relay) makeHandler() http.Handler {
 	router := mux.NewRouter()
 	router.HandleFunc("/status", r.sdkClientMux.getStatus).Methods("GET")
+	router.HandleFunc("/internal/test", r.sdkClientMux.getStatus).Methods("GET")
+	router.HandleFunc("/internal/health", r.sdkClientMux.getStatus).Methods("GET")
 
 	// Client-side evaluation
 	clientSideMiddlewareStack := chainMiddleware(
