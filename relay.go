@@ -282,6 +282,8 @@ func (r *Relay) makeHandler(withRequestLogging bool) http.Handler {
 		router.Use(logging.RequestLoggerMiddleware)
 	}
 	router.HandleFunc("/status", r.sdkClientMux.getStatus).Methods("GET")
+	router.HandleFunc("/internal/test", r.sdkClientMux.getStatus).Methods("GET")
+	router.HandleFunc("/internal/health", r.sdkClientMux.getStatus).Methods("GET")
 
 	// Client-side evaluation
 	clientSideMiddlewareStack := chainMiddleware(
