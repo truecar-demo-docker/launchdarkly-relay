@@ -1,5 +1,7 @@
 # LaunchDarkly Relay Proxy
 
+# Forked from https://github.com/launchdarkly/ld-relay
+
 ## What is it?
 
 The LaunchDarkly Relay Proxy establishes a connection to the LaunchDarkly streaming API, then proxies that stream connection to multiple clients.
