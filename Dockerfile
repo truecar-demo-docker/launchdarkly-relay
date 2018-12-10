@@ -39,6 +39,7 @@ COPY --from=builder ${SRC_DIR}/ldr /usr/bin/ldr
 
 COPY docker-entrypoint.sh /usr/bin/
 
+WORKDIR /
 ADD https://raw.git.corp.tc/infra/universal-build-script/master/secrets.sh .
 RUN chmod +x ./secrets.sh
 
