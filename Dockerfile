@@ -28,6 +28,7 @@ RUN addgroup -g 1000 -S ldr-user && \
     chown 1000:1000 /ldr
 
 RUN apk add --no-cache \
+    bash \
     curl \
     ca-certificates \
  && update-ca-certificates \
@@ -38,7 +39,7 @@ ARG SRC_DIR=/go/src/gopkg.in/launchdarkly/ld-relay.v5
 COPY --from=builder ${SRC_DIR}/ldr /usr/bin/ldr
 
 ADD https://raw.git.corp.tc/infra/universal-build-script/master/secrets.sh .
-RUN chmod +x ./secrets.sh
+RUN chmod +rx ./secrets.sh
 
 USER 1000
 
