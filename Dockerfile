@@ -31,6 +31,10 @@ RUN apk add --no-cache \
     bash \
     curl \
     ca-certificates \
+    python \
+    py-pip \
+    py-setuptools \
+ && pip --no-cache-dir install awscli \
  && update-ca-certificates \
  && rm -rf /var/cache/apk/*
 
