@@ -142,4 +142,4 @@ prefix = \"${PROMETHEUS_PREFIX}\"
 " >> $CONF_FILE
 fi
 
-exec "$@"
+exec /usr/bin/ldr --config /ldr/ld-relay.conf
