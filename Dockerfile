@@ -28,8 +28,13 @@ RUN addgroup -g 1000 -S ldr-user && \
     chown 1000:1000 /ldr
 
 RUN apk add --no-cache \
+    bash \
     curl \
     ca-certificates \
+    python \
+    py-pip \
+    py-setuptools \
+ && pip --no-cache-dir install awscli \
  && update-ca-certificates \
  && rm -rf /var/cache/apk/*
 
@@ -39,8 +44,9 @@ COPY --from=builder ${SRC_DIR}/ldr /usr/bin/ldr
 
 COPY docker-entrypoint.sh /usr/bin/
 
+WORKDIR /var/tmp
 ADD https://raw.git.corp.tc/infra/universal-build-script/master/secrets.sh .
-RUN chmod +x ./secrets.sh
+RUN chmod +rx ./secrets.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
