@@ -1,0 +1,10 @@
+{
+  "common": {
+    "resources": [
+      {
+        "arn": "arn:aws:dynamodb:@@AWS_REGION@@:@@AWS_ACCOUNT_ID@@:table/@@DYNAMODB_TABLE@@",
+        "action_groups": [ "table_read_write" ]
+      }
+    ]
+  }
+}
