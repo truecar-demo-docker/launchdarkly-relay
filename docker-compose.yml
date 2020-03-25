@@ -1,0 +1,11 @@
+---
+services:
+  launchdarkly-relay:
+    build:
+      context: .
+    environment:
+      PRIVATE_DOMAIN: dev.pod.tc
+      PUBLIC_DOMAIN: dev.true.sh
+    ports:
+    - 8030:8030
+version: '2.1'
