@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -euox pipefail
+
+if [[ "${BUILDKITE_COMMAND}" == "buildkite-agent pipeline upload"* ]]; then
+  image_repo_name=consumer-frontend
+  tc_build_number_name=${BUILDKITE_PIPELINE_SLUG/abp/consumer}
+  image_registry_repository="${REGISTRY_HOST}/${image_repo_name}"
+
+  export IMAGE_TAG="$(tc-build-number "${tc_build_number_name}")"
+  export DOCKER_TAG="${image_registry_repository}:${IMAGE_TAG}"
+  export DOCKER_TAG_BUILDER="${image_registry_repository}:builder-${IMAGE_TAG}"
+  export DOCKER_TAG_CI="${image_registry_repository}:ci-${IMAGE_TAG}"
+  export DOCKER_TAG_CYPRESS="${image_registry_repository}:cypress-${BUILDKITE_BUILD_ID}"
+  # export CACHE_ID="$(md5sum < package-lock.json | awk '{print $1}')"
+  export CACHE_ID="$(md5sum < package-lock.json | awk '{print $1}')"
+  export ASSET_PREFIX="$(date +"%y-%m")"
+  export ASSET_URL="https://consumer.tcimg.net/assets/${ASSET_PREFIX}"
+  export DOCKER_POD_BUILD_OPTIONS="--build-arg ASSET_URL=${ASSET_URL}"
+fi
