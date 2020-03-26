@@ -43,6 +43,7 @@ ARG SRC_DIR=/go/src/gopkg.in/launchdarkly/ld-relay.v5
 
 COPY --from=builder ${SRC_DIR}/ldr /usr/bin/ldr
 
+COPY /linux/etc/ld-relay.conf /ldr
 ADD https://raw.git.corp.tc/infra/universal-build-script/feature/system-jq/secrets.sh .
 RUN chmod +rx ./secrets.sh
 
